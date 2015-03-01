@@ -28,13 +28,15 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
+				<a class="navbar-brand" href="/">Movie-Draft</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				@if (Auth::check())
 				<ul class="nav navbar-nav">
-					<li><a href="/">Home</a></li>
+					<li><a href="{{ url('movies') }}">Movies</a></li>
 				</ul>
+				@endif
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
