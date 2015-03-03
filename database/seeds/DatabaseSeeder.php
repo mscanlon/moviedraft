@@ -14,37 +14,22 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('UserTableSeeder');
-		$this->call('MovieTableSeeder');
-	}
-
-}
-
-class UserTableSeeder extends Seeder {
-
-    public function run()
-    {
-        DB::table('users')->delete();
+		DB::table('users')->delete();
 
         App\User::create(['name' => 'Mike Test',
                       'email' => 'mike@test.com',
                       'password' => bcrypt('tester')]);
-	App\User::create(['name' => 'Jen Test',
-                      'email' => 'Jen@test.com',
-                      'password' => bcrypt('tester')]);
-	App\User::create(['name' => 'Cecil Test',
-                      'email' => 'cecil@test.com',
-                      'password' => bcrypt('tester')]);
-	App\User::create(['name' => 'Test Test',
-                      'email' => 'test@test.com',
-                      'password' => bcrypt('tester')]);
-    }
-
-}
-
-class MovieTableSeeder extends Seeder {
-	public function run()
-	{
+		App\User::create(['name' => 'Jen Test',
+						  'email' => 'Jen@test.com',
+						  'password' => bcrypt('tester')]);
+		App\User::create(['name' => 'Cecil Test',
+						  'email' => 'cecil@test.com',
+						  'password' => bcrypt('tester')]);
+		App\User::create(['name' => 'Test Test',
+						  'email' => 'test@test.com',
+						  'password' => bcrypt('tester')]);
+	
+	
 		DB::table('movies')->delete();
 
 		App\Movie::create(['name' => 'How to Train Your Dragon 2', 'money' => 177002924]);
@@ -65,9 +50,33 @@ class MovieTableSeeder extends Seeder {
 		App\Movie::create(['name' => 'American Sniper', 'money' => 325308000]);
 		App\Movie::create(['name' => 'Divergent', 'money' => 150947895]);
 		App\Movie::create(['name' => 'Gone Girl', 'money' => 167767189]);
-
-
-
-
+	
+	
+		DB::table('drafts')->delete();
+		DB::table('draft_user')->delete();
+		
+		DB::insert("INSERT INTO drafts (name, total_bid, created_at, updated_at) values ('Test Game 1',100, NOW(),NOW() )");
+		DB::insert("INSERT INTO drafts (name, total_bid, created_at, updated_at) values ('Test Game 1',100, NOW(),NOW() )");
+		
+		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (1,1,'Team Name 1', NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (1,2,'Team name 2', NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (2,1,'Team name 3', NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (1,3,'Team name 4', NOW(),NOW() )");
+	
+	
+		DB::table('draft_boards')->delete();
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (1,1,1, 25, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (1,2,3, 10, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (1,3,2, 13, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (1,4,1, 15, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (1,5,3, 23, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (1,6,2, 17, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (1,7,null, 0, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (2,1,1, 4, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (2,8,1, 18, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (2,9,null, 0, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (2,10,null, 0, NOW(),NOW() )");
+		
 	}
+
 }

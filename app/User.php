@@ -30,5 +30,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+	
+	public function drafts()
+    {
+        return $this->belongsToMany('App\Draft')->withTimestamps()->addSelect('team_name');
+    }
 
 }
