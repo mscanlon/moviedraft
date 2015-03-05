@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder {
 		DB::table('draft_user')->delete();
 		
 		DB::insert("INSERT INTO drafts (name, total_bid, created_at, updated_at) values ('Test Game 1',100, NOW(),NOW() )");
-		DB::insert("INSERT INTO drafts (name, total_bid, created_at, updated_at) values ('Test Game 1',100, NOW(),NOW() )");
+		DB::insert("INSERT INTO drafts (name, total_bid, created_at, updated_at) values ('Draft Game 2',100, NOW(),NOW() )");
 		
 		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (1,1,'Team Name 1', NOW(),NOW() )");
 		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (1,2,'Team name 2', NOW(),NOW() )");

@@ -33,7 +33,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	
 	public function drafts()
     {
-        return $this->belongsToMany('App\Draft')->withTimestamps()->addSelect('team_name');
+        return $this->belongsToMany('App\Draft')->withTimestamps();
     }
 
 }

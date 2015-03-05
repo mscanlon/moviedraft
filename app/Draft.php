@@ -13,7 +13,7 @@ class Draft extends Model {
     
     public function users()
     {
-        return $this->belongsToMany('App\User')->withTimestamps()->addSelect('team_name');
+        return $this->belongsToMany('App\User')->withTimestamps();
     }
 
 }

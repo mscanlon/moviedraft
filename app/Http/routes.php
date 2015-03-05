@@ -13,8 +13,13 @@
 
 Route::get('/', 'WelcomeController@index');
 
+//Route::get('drafts', 'DraftController@index');
+Route::resource('draft', 'DraftController');
+
 Route::get('movies/{id}', 'MovieController@show');
 Route::get('movies', 'MovieController@index');
+
+
 
 
 Route::controllers([
