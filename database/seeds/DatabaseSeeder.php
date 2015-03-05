@@ -57,12 +57,14 @@ class DatabaseSeeder extends Seeder {
 		
 		DB::insert("INSERT INTO drafts (name, total_bid, created_at, updated_at) values ('Test Game 1',100, NOW(),NOW() )");
 		DB::insert("INSERT INTO drafts (name, total_bid, created_at, updated_at) values ('Draft Game 2',100, NOW(),NOW() )");
-		
-		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (1,1,'Team Name 1', NOW(),NOW() )");
-		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (1,2,'Team name 2', NOW(),NOW() )");
-		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (2,1,'Team name 3', NOW(),NOW() )");
-		DB::insert("INSERT INTO draft_user (draft_id, user_id,team_name, created_at, updated_at) values (1,3,'Team name 4', NOW(),NOW() )");
-	
+        DB::insert("INSERT INTO drafts (name, total_bid, created_at, updated_at) values ('Empty Game 3',100, NOW(),NOW() )");
+
+		DB::insert("INSERT INTO draft_user (draft_id, user_id, created_at, updated_at) values (1,1, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_user (draft_id, user_id, created_at, updated_at) values (1,2, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_user (draft_id, user_id, created_at, updated_at) values (2,1, NOW(),NOW() )");
+		DB::insert("INSERT INTO draft_user (draft_id, user_id, created_at, updated_at) values (1,3, NOW(),NOW() )");
+        DB::insert("INSERT INTO draft_user (draft_id, user_id, created_at, updated_at) values (3,1, NOW(),NOW() )");
+
 	
 		DB::table('draft_boards')->delete();
 		DB::insert("INSERT INTO draft_boards (draft_id, movie_id,user_id, bid, created_at, updated_at) values (1,1,1, 25, NOW(),NOW() )");

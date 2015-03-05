@@ -63,8 +63,10 @@ class DraftController extends Controller {
 	{
 		$data['draft'] = Draft::find($id);
         $data['board'] = DraftBoard::find($id);
+        $data['standings'] = DraftBoard::standings($id);
+        //dd($data);
 
-        return $data;
+        return view('drafts.show', $data);
 	}
 
 	/**
