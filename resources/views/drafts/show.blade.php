@@ -8,9 +8,20 @@
             <br>Created on: {{ $draft->created_at }}
             </p>
             <p>
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Edit Draft</button>
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Add Players</button>
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-film" aria-hidden="true"></span> Edit Movies</button>
+                <button type="button" class="btn btn-default">
+                    <a href="{{ url('draft', $draft->id, 'edit' ) }}">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    Settings
+                    </a>
+                </button>
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    Players
+                </button>
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                    Movies
+                </button>
             </p>
         </div>
 
