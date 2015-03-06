@@ -5,8 +5,10 @@ use App\Http\Controllers\Controller;
 use App\Draft;
 use App\DraftBoard;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\CreateDraftRequest;
+use App\Http\Requests\DraftRequest;
+use Illuminate\Support\Facades\DB;
 
 class DraftController extends Controller {
 
@@ -48,7 +50,7 @@ class DraftController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(CreateDraftRequest $request)
+	public function store(DraftRequest $request)
 	{
 
         $draft = new Draft();
@@ -86,7 +88,8 @@ class DraftController extends Controller {
 	 */
 	public function edit($id)
 	{
-		return "edit draft $id";
+		$draft = Draft::find($id);
+        return view('drafts.edit')->with('draft',$draft);
 	}
 
 	/**
@@ -95,9 +98,15 @@ class DraftController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, DraftRequest $request)
 	{
-		//
+        $draft = Draft::find($id);
+        $draft->name = $request->get('name');
+        $draft->total_bid = $request->get('total_bid');
+
+        $draft->save();
+
+        return redirect('draft/'.$id);
 	}
 
 	/**
@@ -108,7 +117,35 @@ class DraftController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		Draft::destroy($id);
+        return redirect('/draft');
 	}
 
+
+    public function showUsers($draft_id)
+    {
+        $data['draft'] = Draft::find($draft_id);
+        $data['users'] = $data['draft']->users()->get();
+
+        return view('drafts.players', $data);
+    }
+
+
+    public function addUser($draft_id, Requests\AddPlayerRequest $request)
+    {
+        $user = User::where('email', $request->get('email'))->first();
+        $draft = Draft::find($draft_id);
+
+        $user->drafts()->attach($draft);
+
+        return redirect('draft/'.$draft_id.'/players');
+    }
+
+    public function quitDraft($draft_id)
+    {
+        $draft = Draft::findOrFail($draft_id);
+
+        Auth::user()->drafts()->detach($draft);
+        return redirect('draft');
+    }
 }

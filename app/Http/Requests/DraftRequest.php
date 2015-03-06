@@ -3,7 +3,7 @@
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CreateDraftRequest extends Request {
+class DraftRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.

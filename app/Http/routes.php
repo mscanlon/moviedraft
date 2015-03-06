@@ -13,10 +13,14 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('draft', 'DraftController@index');
-Route::get('draft/create', 'DraftController@create');
-Route::post('draft', 'DraftController@store');
-Route::get('draft/{draft}', 'DraftController@show');
+//Route::get('draft', 'DraftController@index');
+//Route::get('draft/create', 'DraftController@create');
+//Route::post('draft', 'DraftController@store');
+//Route::get('draft/{draft}', 'DraftController@show');
+Route::resource('draft', 'DraftController');
+Route::get('draft/{draft}/players', 'DraftController@showUsers');
+Route::post('draft/{draft}/players', 'DraftController@addUser');
+Route::get('draft/{draft}/quit', 'DraftController@quitDraft');
 
 
 Route::get('movies/{id}', 'MovieController@show');
