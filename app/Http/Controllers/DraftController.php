@@ -5,8 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Draft;
 use App\DraftBoard;
 
-use Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CreateDraftRequest;
 
 class DraftController extends Controller {
 
@@ -48,13 +48,12 @@ class DraftController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateDraftRequest $request)
 	{
-		$user =
 
         $draft = new Draft();
-        $draft->name = Request::get('name');
-        $draft->total_bid = Request::get('total_bid');
+        $draft->name = $request->get('name');
+        $draft->total_bid = $request->get('total_bid');
 
         $draft->save();
         Auth::user()->drafts()->attach($draft);
