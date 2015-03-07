@@ -16,4 +16,9 @@ class Draft extends Model {
         return $this->belongsToMany('App\User')->withTimestamps();
     }
 
+    public function movies()
+    {
+        return $this->belongsToMany('App\Movie','draft_boards');
+    }
+
 }

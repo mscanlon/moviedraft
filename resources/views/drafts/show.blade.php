@@ -61,7 +61,17 @@
             <th scope="row">{{ $item->name }}</th>
             <td>{{ $item->money }}</td>
             <td>{{ $item->userName }}</td>
-            <td>{{ $item->bid }}</td>
+            <td style="width: 125px;">
+                <form class="form-horizontal" role="form" method="POST" action="/draft/{{ $draft->id }}/bid/{{ $item->id }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="bid" value="{{ $item->bid }}">
+                          <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit">Bid</button>
+                          </span>
+                    </div><!-- /input-group -->
+                </form>
+            </td>
         </tr>
     @endforeach
     </tbody>

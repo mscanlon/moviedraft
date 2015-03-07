@@ -24,4 +24,29 @@ class DraftBoard {
             ->orderBy('money', 'desc')
             ->get();
     }
+
+    public static function removeMovie($draft_id, $movie_id)
+    {
+        DB::table('draft_boards')
+            ->where('draft_id', $draft_id)
+            ->where('movie_id', $movie_id)
+            ->delete();
+    }
+
+    public static function addMovie($draft_id, $movie_id)
+    {
+        DB::table('draft_boards')->insert(
+            ['draft_id' => $draft_id,
+            'movie_id' => $movie_id]
+        );
+    }
+
+    public static function makeBid($draftBoard_id, $bid, $user_id){
+        DB::table('draft_boards')
+            ->where('id', $draftBoard_id)
+            ->update(
+                ['bid' => $bid,
+                'user_id' => $user_id]
+            );
+    }
 }

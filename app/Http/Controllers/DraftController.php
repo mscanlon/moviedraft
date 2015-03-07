@@ -1,14 +1,17 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use Request;
 use App\Http\Controllers\Controller;
 use App\Draft;
 use App\DraftBoard;
 
+use App\Movie;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DraftRequest;
 use Illuminate\Support\Facades\DB;
+
 
 class DraftController extends Controller {
 
@@ -147,5 +150,39 @@ class DraftController extends Controller {
 
         Auth::user()->drafts()->detach($draft);
         return redirect('draft');
+    }
+
+    public function showMovies($draft_id)
+    {
+        $data['draft'] = Draft::findOrFail($draft_id);
+        $data['moviesInDraft'] = $data['draft']->movies()->get();
+        $excludeMovies = array();
+        foreach( $data['moviesInDraft'] as $movie ){
+            $excludeMovies[] = $movie->id;
+        }
+        $data['movies'] = Movie::whereNotIn('id', $excludeMovies)->get();
+
+        return view('drafts.movies', $data);
+    }
+
+    public function removeMovie($draft_id, $movie_id){
+        DraftBoard::removeMovie($draft_id, $movie_id);
+        return redirect('/draft/'.$draft_id.'/movies');
+    }
+
+    public function addMovies($draft_id){
+        $movies = Request::get('movies');
+        foreach($movies as $movie_id){
+            DraftBoard::addMovie($draft_id, $movie_id);
+        }
+        return redirect('/draft/'.$draft_id.'/movies');
+    }
+
+    public function makeBid($draft_id, $draftBoard_id){
+        $bid = Request::get('bid');
+
+        DraftBoard::makeBid($draftBoard_id, $bid, Auth::id() );
+
+        return redirect('/draft/'.$draft_id);
     }
 }
