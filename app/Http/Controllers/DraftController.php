@@ -23,6 +23,7 @@ class DraftController extends Controller {
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('draftUser', ['except' => ['index','create','store']]);
     }
 
 

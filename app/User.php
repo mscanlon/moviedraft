@@ -36,4 +36,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('App\Draft')->withTimestamps();
     }
 
+    public function isPartOfDraft( $draft_id )
+    {
+        $count = $this->drafts()->where('draft_id', $draft_id)->count();
+        return ($count > 0);
+    }
+
 }
