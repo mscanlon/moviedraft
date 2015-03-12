@@ -27,6 +27,16 @@ Route::get('draft/{draft}/removeMovie/{movie}', 'DraftController@removeMovie');
 Route::post('draft/{draft}/bid/{draftBoard}', 'DraftController@makeBid');
 
 
+Route::get('api', function()
+{
+    $results = Tomatoes::boxOffice();
+    foreach( $results['movies'] as $movie){
+        var_dump($movie);
+    }
+    dd('done');
+});
+
+
 Route::get('movies/{id}', 'MovieController@show');
 Route::get('movies', 'MovieController@index');
 

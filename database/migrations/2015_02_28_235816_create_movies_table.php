@@ -16,7 +16,13 @@ class CreateMoviesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->double('money', 15, 2)->default(0);
+            $table->string('rating')->nullable();
+            $table->integer('runtime')->unsigned()->nullable();
+            $table->date('release_date')->nullable();
+            $table->text('synopsis')->nullable();
+            $table->integer('tomatoes_id')->unsigned()->nullable();
+            $table->integer('box_office_id')->unsigned()->nullable();
+			$table->bigInteger('earnings')->unsigned()->default(0);
 			$table->timestamps();
 		});
 	}

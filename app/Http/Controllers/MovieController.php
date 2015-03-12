@@ -25,7 +25,7 @@ class MovieController extends Controller {
 	 */
 	public function index()
 	{
-            $movies = movie::orderBy('money','desc')->get();
+            $movies = movie::orderBy('earnings','desc')->get();
             return view('movies.index')->with('movies', $movies);
 	}
 

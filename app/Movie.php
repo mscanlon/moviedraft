@@ -9,6 +9,10 @@ class Movie extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'money'];
+    protected $fillable = ['name', 'earnings', 'rating', 'runtime',
+        'release_date', 'synopsis', 'tomatoes_id', 'box_office_id'
+    ];
+
+    protected $dates = ['release_date'];
 
 }
