@@ -20,7 +20,7 @@ class CreateMoviesTable extends Migration {
             $table->integer('runtime')->unsigned()->nullable();
             $table->date('release_date')->nullable();
             $table->text('synopsis')->nullable();
-            $table->integer('tomatoes_id')->unsigned()->nullable();
+            $table->integer('tomatoes_id')->unsigned()->nullable()->unique();
             $table->integer('box_office_id')->unsigned()->nullable();
 			$table->bigInteger('earnings')->unsigned()->default(0);
 			$table->timestamps();

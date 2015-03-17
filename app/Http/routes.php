@@ -13,10 +13,7 @@
 
 Route::get('/', 'WelcomeController@index');
 
-//Route::get('draft', 'DraftController@index');
-//Route::get('draft/create', 'DraftController@create');
-//Route::post('draft', 'DraftController@store');
-//Route::get('draft/{draft}', 'DraftController@show');
+
 Route::resource('draft', 'DraftController');
 Route::get('draft/{draft}/players', 'DraftController@showUsers');
 Route::post('draft/{draft}/players', 'DraftController@addUser');
@@ -27,20 +24,8 @@ Route::get('draft/{draft}/removeMovie/{movie}', 'DraftController@removeMovie');
 Route::post('draft/{draft}/bid/{draftBoard}', 'DraftController@makeBid');
 
 
-Route::get('api', function()
-{
-    $results = Tomatoes::boxOffice();
-    foreach( $results['movies'] as $movie){
-        var_dump($movie);
-    }
-    dd('done');
-});
-
-
-Route::get('movies/{id}', 'MovieController@show');
-Route::get('movies', 'MovieController@index');
-
-
+Route::resource('movies', 'MovieController');
+Route::post('movies/search', 'MovieController@search');
 
 
 Route::controllers([

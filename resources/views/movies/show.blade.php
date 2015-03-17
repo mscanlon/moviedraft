@@ -7,4 +7,5 @@
     <p>Rating: {{ $movie->rating }}</p>
     <p>Runtime: {{ $movie->runtime }}</p>
     <p>Plot Summary:<br>{{ $movie->synopsis }}</p>
+    <p><a href="/movies/{{ $movie->id }}/edit" class="btn btn-primary">Edit Movie</a></p>
 @endsection

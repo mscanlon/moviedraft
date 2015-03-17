@@ -17,7 +17,7 @@ class TomatoAPI {
     public function search($query)
     {
         return $this->client
-            ->get('movies.json?'.$this->apiKey.'&q='.$query.'&page_limit=1')
+            ->get('movies.json?'.$this->apiKey.'&q='.$query)
             ->send()->json();
     }
 
@@ -33,6 +33,13 @@ class TomatoAPI {
     {
         return $this->client
             ->get('lists/movies/box_office.json?'.$this->apiKey)
+            ->send()->json();
+    }
+
+    public function upcoming()
+    {
+        return $this->client
+            ->get('lists/movies/upcoming.json?'.$this->apiKey)
             ->send()->json();
     }
 

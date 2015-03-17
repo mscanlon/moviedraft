@@ -1,10 +1,9 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Facades\Tomatoes;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Movie;
-
-use Illuminate\Http\Request;
 
 class MovieController extends Controller {
         
@@ -36,7 +35,7 @@ class MovieController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('movies.create');
 	}
 
 	/**
@@ -69,7 +68,8 @@ class MovieController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$movie = Movie::findOrFail($id);
+        return view('movies.edit')->with('movie',$movie);
 	}
 
 	/**
@@ -78,9 +78,17 @@ class MovieController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Requests\MovieUpdateRequest $request)
 	{
-		//
+		$movie = Movie::find($id);
+        $movie->name = $request->get('name');
+        $movie->earnings = $request->get('earnings');
+        $movie->rating = $request->get('rating');
+        $movie->synopsis = $request->get('synopsis');
+
+        $movie->save();
+
+        return redirect('/movies/'.$id);
 	}
 
 	/**
@@ -93,5 +101,13 @@ class MovieController extends Controller {
 	{
 		//
 	}
+
+    public function search(Request $request)
+    {
+        $data['searchTerm'] = $request->input('search');
+        $data['results'] = Tomatoes::search($data['searchTerm']);
+
+        return view('movies.results', $data);
+    }
 
 }
